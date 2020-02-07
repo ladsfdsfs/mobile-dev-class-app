@@ -6,21 +6,24 @@ import { RadioButtons } from 'react-native-radio-buttons'
 class Question extends Component {
   constructor(props){
     super(props);
-    this.state = {num:0}
+    this.state = {ans:false}
 
   }
   onselect = (opt)=>{
-    console.log(opt)
+    if(opt==this.props.ans){
+      this.setState({ans:true})
+    } else {
+      this.setState({ans:false})
+    }
   }
   
   render() {
     
 
     
-
-    function createTouch(text, type, that){
-      return (<TouchableHighlight  onPress={()=>that.onselect(type)} >
-        <Text style={{color:'green'}}>{text}</Text>
+    function createTouch(text, type, that, dis=false){
+      return (<TouchableHighlight disabled={dis}  onPress={()=>that.onselect(type)} >
+        <Text style={{color:'green', textAlign:'left'}}>{text}</Text>
       </TouchableHighlight>)
     }
 
@@ -30,25 +33,23 @@ class Question extends Component {
     for(let x = 0; x<15; x++){
       b+=a;
     }
-    if(this.state.num==0)
-    return (<View style={{}}>
-      <Text>{this.props.q}</Text>
-      {createTouch(this.props.a.a, 1, this)}
-      {createTouch(this.props.a.b, 2, this)}
-      
-    </View>);
-    else if(this.state.num==1)
-    return (<View style={{}}>
-      <Text style={{backgroundColor:'green'}}>{this.props.q}</Text>
-      {createTouch(this.props.a.a, 1, this)}
-      {createTouch(this.props.a.b, 2, this)}
+    if(this.state.ans)
+    return (<View style={{margin:"5%", width:'80%', backgroundColor:'#79e58f'}}>
+      <Text style={{textAlign:'center'}}>{this.props.q}</Text>
+      {createTouch(this.props.a.a, 1, this,true)}
+      {createTouch(this.props.a.b, 2, this,true)}
+      {createTouch(this.props.a.c, 3, this,true)}
+      {createTouch(this.props.a.d, 4, this,true)}
       
     </View>);
     else 
-    return (<View style={{}}>
-      <Text style={{backgroundColor:'red'}}>{this.props.q}</Text>
+    return (<View style={{margin:"5%",width:'80%'}}>
+      <Text style={{textAlign:'center'}}>{this.props.q}</Text>
       {createTouch(this.props.a.a, 1, this)}
       {createTouch(this.props.a.b, 2, this)}
+      {createTouch(this.props.a.c, 3, this)}
+      {createTouch(this.props.a.d, 4, this)}
+      
       
     </View>);
       
@@ -61,18 +62,31 @@ class Question extends Component {
 export default class HelloWorldApp extends Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center"  }}>
-        <Text>buffer</Text>
-        <Text>buffer</Text>
+      <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center", marginTop:"10%" }}>
         
-        <Text>Hello, world!</Text>
-        <Text>Connected to aLive Editor!</Text>
-        <Question q="What is a bear?" a={{a:'a type of cheese', b:'a Toyota model released in 1943', c:'smoky', d:'a smoothie'}}/>
+        
+        <Text style={{fontSize:20}}>Quiz App thing thats not on android studio</Text>
+        <Question q="What is a bear?" a={{a:'a type of cheese', b:'a tree that grows in northern Canada', c:'smoky', d:'a smoothie'}} ans="3"/>
 
-       
+        <Question q="What is Obama's last name?" 
+        a={{a:'Screwdriver Handle', b:'Care', c:'Clinton', d:'2004 Toyota Prius'}} 
+        ans="2"/>
+
+        <Question q="Who lives in a pineapple under the sea?" 
+        a={{a:'Boaty McBoatface',b:'not me lol', c:'Bill Burr', d:'Pollution'}}
+        ans="4" />
        
       </View>
       
     ); 
   }
 }
+
+
+/*
+
+{createTouch(this.props.a.a, 1, this)}
+      {createTouch(this.props.a.b, 2, this)}
+      {createTouch(this.props.a.c, 3, this)}
+      {createTouch(this.props.a.d, 4, this)}
+*/
