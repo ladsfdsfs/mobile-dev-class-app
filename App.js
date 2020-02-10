@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Button, Alert, TouchableHighlight, StyleSheet } from 'react-native';
+import list from './assets/data.json'
 
 const styles = StyleSheet.create({
   qc:{margin:"5%", width:'80%', backgroundColor:'#79e58f'},
@@ -86,6 +87,34 @@ class Runaway extends Component {
 
 }
 
+class TextCycle extends Component {
+  constructor(props){
+    super(props);
+    this.state = {t:list.list, c:0}
+  }
+
+  onpress(){
+    if(this.state.c<this.state.t.length-1){
+      this.setState({c:this.state.c+1})
+    } else this.setState({c:0})
+  }
+  render(){
+
+
+    return ( 
+      <View style={{alignItems:'center'}}>
+        <TouchableHighlight onPress={()=>this.onpress()}>
+          <Text style={{color:'blue', fontSize:20}}>press me change text thing</Text>
+        </TouchableHighlight>
+
+      <Text style={{marginTop:'5%' }}>{this.state.t[this.state.c]}</Text>
+
+      </View>
+    )
+    
+  }
+}
+
 export default class App extends Component {
   
   render() {
@@ -104,7 +133,7 @@ export default class App extends Component {
         a={{a:'Boaty McBoatface',b:'not me lol', c:'Bill Burr', d:'Pollution'}}
         ans="4" />
 
-       <Runaway/>
+       <TextCycle/>
       </View>
       
     ); 
