@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-import { Text, View, Button, Alert, TouchableHighlight } from 'react-native';
-import { RadioButtons } from 'react-native-radio-buttons'
+import { Text, View, Button, Alert, TouchableHighlight, StyleSheet } from 'react-native';
 
-
+const styles = StyleSheet.create({
+  qc:{margin:"5%", width:'80%', backgroundColor:'#79e58f'},
+  qv:{margin:"5%",width:'80%'}
+})
 class Question extends Component {
   constructor(props){
     super(props);
     this.state = {ans:false}
 
   }
+
   onselect = (opt)=>{
     if(opt==this.props.ans){
+      console.log('correct! closing responses.')
       this.setState({ans:true})
     } else {
+      console.log('wrong answer')
       this.setState({ans:false})
+      
     }
   }
   
   render() {
-    
-
     
     function createTouch(text, type, that, dis=false){
       return (<TouchableHighlight disabled={dis}  onPress={()=>that.onselect(type)} >
@@ -34,7 +38,7 @@ class Question extends Component {
       b+=a;
     }
     if(this.state.ans)
-    return (<View style={{margin:"5%", width:'80%', backgroundColor:'#79e58f'}}>
+    return (<View style={styles.qc}>
       <Text style={{textAlign:'center'}}>{this.props.q}</Text>
       {createTouch(this.props.a.a, 1, this,true)}
       {createTouch(this.props.a.b, 2, this,true)}
@@ -43,7 +47,7 @@ class Question extends Component {
       
     </View>);
     else 
-    return (<View style={{margin:"5%",width:'80%'}}>
+    return (<View style={styles.qv}>
       <Text style={{textAlign:'center'}}>{this.props.q}</Text>
       {createTouch(this.props.a.a, 1, this)}
       {createTouch(this.props.a.b, 2, this)}
@@ -55,17 +59,41 @@ class Question extends Component {
       
   }
 }
-// <Question q="What is a bear?" a={{a:'a type of cheese', b:'a Toyota model released in 1943', c:'smoky', d:'a smoothie'}}/>
+class Runaway extends Component {
+  constructor(props){
+    super(props);
+    this.state = {marginTop:'10%', marginLeft:'10%'}
+  }
 
+  _onpress(that){
+    let t = Math.floor(Math.random()*100)
+    let l = Math.floor(Math.random()*100)
+    that.setState({marginTop:t+'%', marginLeft:l+'%'})
+  }
 
+  render(){
+    return (
+      <View style={{flex:2, alignSelf:'flex-start'}}>
+        <TouchableHighlight 
+        style={{marginLeft:this.state.marginLeft, marginTop:this.state.marginTop}}
+        onPress={()=>this._onpress(this)}
+        >
+          <Text style={{backgroundColor:'cyan'}}>lolololol</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
 
-export default class HelloWorldApp extends Component {
+}
+
+export default class App extends Component {
+  
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center", marginTop:"10%" }}>
         
         
-        <Text style={{fontSize:20}}>Quiz App thing thats not on android studio</Text>
+        <Text style={{fontSize:20}}>Button App thing thats not on android studio</Text>
         <Question q="What is a bear?" a={{a:'a type of cheese', b:'a tree that grows in northern Canada', c:'smoky', d:'a smoothie'}} ans="3"/>
 
         <Question q="What is Obama's last name?" 
@@ -75,7 +103,8 @@ export default class HelloWorldApp extends Component {
         <Question q="Who lives in a pineapple under the sea?" 
         a={{a:'Boaty McBoatface',b:'not me lol', c:'Bill Burr', d:'Pollution'}}
         ans="4" />
-       
+
+       <Runaway/>
       </View>
       
     ); 
@@ -83,10 +112,3 @@ export default class HelloWorldApp extends Component {
 }
 
 
-/*
-
-{createTouch(this.props.a.a, 1, this)}
-      {createTouch(this.props.a.b, 2, this)}
-      {createTouch(this.props.a.c, 3, this)}
-      {createTouch(this.props.a.d, 4, this)}
-*/
