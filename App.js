@@ -7,8 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 //import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-var L1_2 = require('./routes/Labs1_2')
-var L3 = require('./routes/Lab3')
+import renderL3 from './routes/Lab3'
+import renderL1_2 from './routes/Labs1_2'
 
 
 
@@ -35,7 +35,8 @@ function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }} />
-        <Tab.Screen name="Labs 1-2" component={L1_2.render} />
+        <Tab.Screen name="Labs 1-2" component={renderL1_2} />
+        <Tab.Screen name="Lab 3" component={renderL3} />
       </Tab.Navigator>
     </NavigationContainer>
   );

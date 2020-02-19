@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Button, Alert, TouchableHighlight, StyleSheet } from 'react-native';
 
-import list from './assets/data.json'
+import list from '../assets/data.json'
 
 
 
@@ -120,8 +120,7 @@ class TextCycle extends Component {
     }
 }
 
-
-modules.exports.render = function ({ navigation }) {
+export default function renderL1_2 ({ navigation }) {
     return (<View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center", marginTop: "10%" }}>
 
 
