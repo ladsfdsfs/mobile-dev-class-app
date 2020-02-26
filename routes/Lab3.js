@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Button, Alert, TouchableHighlight, StyleSheet } from 'react-native';
 
-import { AsyncStorage, ToastAndroid } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 import Slider from 'react-native-slider';
 
@@ -34,10 +34,7 @@ class Lab extends Component {
         this.state={
             size:20
         }
-        this.storeData(1,0)
-        this.storeData(2,0)
-        this.storeData(3,0)
-        this.storeData(4,0)
+        
 
     }
     storeData = async (key,data) => {
