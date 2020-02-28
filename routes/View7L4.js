@@ -1,7 +1,6 @@
 import { Text, View, Alert, TouchableHighlight, StyleSheet, Button, FlatList } from 'react-native';
 import React, { Component } from 'react';
 
-import {CheckBox} from 'react-native-elements';
 
 import V7helper from './V7helper'
 
